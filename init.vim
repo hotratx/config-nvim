@@ -176,5 +176,3 @@ let g:tex_conceal='abdmg'
 "
 let g:sonokai_style = 'andromeda'
 colorscheme sonokai
-
-let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
