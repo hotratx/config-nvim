@@ -15,7 +15,7 @@ if has("nvim")
   Plug 'kristijanhusak/defx-icons'
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'neovim/nvim-lspconfig'
-  Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'williamboman/nvim-lsp-installer'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -30,9 +30,9 @@ if has("nvim")
   "Plug 'rose-pine/neovim'
   Plug 'xiyaowong/nvim-transparent'
   Plug 'akinsho/nvim-toggleterm.lua'
-  Plug 'tpope/vim-markdown'
+  "Plug 'tpope/vim-markdown'
   Plug 'rafi/awesome-vim-colorschemes'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   Plug 'mattn/emmet-vim'
   Plug 'SirVer/ultisnips'
   Plug 'lervag/vimtex'
