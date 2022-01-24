@@ -8,20 +8,8 @@ scriptencoding utf-8
 " stop loading config if it's on tiny or small
 if !1 | finish | endif
 
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-let g:vim_markdown_folding_disabled = 1
-
-" do not use conceal feature, the implementation is not so good
-let g:vim_markdown_conceal = 0
-
-" support front matter of various format
-let g:vim_markdown_frontmatter = 1  " for YAML format
-let g:vim_markdown_toml_frontmatter = 1  " for TOML format
-let g:vim_markdown_json_frontmatter = 1  " for JSON format
-
 set nocompatible
 set number
-set relativenumber
 syntax enable
 set fileencodings=utf-8,sjis,euc-jp,latin
 set encoding=utf-8
@@ -100,6 +88,8 @@ endif
 
 "}}}
 
+"}}}
+
 " File types "{{{
 " ---------------------------------------------------------------------
 " JavaScript
@@ -133,24 +123,18 @@ endif
 runtime ./maps.vim
 "}}}
 
-" Syntax theme "{{{
+" Imports "{{{
 " ---------------------------------------------------------------------
-
-" true color
-if exists("&termguicolors") && exists("&winblend")
-  syntax enable
-  set termguicolors
-  set winblend=0
-  set wildoptions=pum
-  set pumblend=5
-  set background=dark
-  " Use NeoSolarized
-  let g:neosolarized_termtrans=1
-  runtime ./colors/NeoSolarized.vim
-  colorscheme NeoSolarized
+runtime ./plug.vim
+if has("unix")
+  let s:uname = system("uname -s")
+  " Do Mac stuff
+  if s:uname == "Darwin\n"
+    runtime ./macos.vim
+  endif
 endif
 
-
+runtime ./maps.vim
 "}}}
 
 " Extras "{{{
@@ -158,21 +142,20 @@ endif
 set exrc
 "}}}
 
-" emmet
-let g:user_emmet_settings = {
-\  'html' : {
-\    'block_all_childless' : 1,
-\  },
-\}
-
-
-" vimtex
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-" vim: set foldmethod=marker foldlevel=0:
-"
-let g:sonokai_style = 'andromeda'
+" Color schema Sonokai
+" Important!!
+if has('termguicolors')
+  set termguicolors
+endif
+" The configuration options should be placed before `colorscheme sonokai`.
+let g:sonokai_style = 'espresso'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
 colorscheme sonokai
+
+
+nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
+nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
+nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
+" Only set if you have telescope installed
+nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>

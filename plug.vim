@@ -4,49 +4,39 @@ endif
 
 call plug#begin()
 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'cohama/lexima.vim'
-Plug 'mhinz/vim-startify'
-
 if has("nvim")
-  Plug 'hoob3rt/lualine.nvim'
-  Plug 'kristijanhusak/defx-git'
-  Plug 'kristijanhusak/defx-icons'
+  " Bara de informações que fica na parte inferior da tela
+  Plug 'hoob3rt/lualine.nvim' 
+  " Icones do git que aparecem do lado o texto
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'williamboman/nvim-lsp-installer'
-  Plug 'glepnir/lspsaga.nvim'
-  Plug 'folke/lsp-colors.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-  Plug 'kyazdani42/nvim-tree.lua'
-  Plug 'kevinhwang91/rnvimr'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'nvim-lua/popup.nvim'
+  " Telescope
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'airblade/vim-gitgutter'
-  "Plug 'rose-pine/neovim'
-  Plug 'xiyaowong/nvim-transparent'
-  Plug 'akinsho/nvim-toggleterm.lua'
-  "Plug 'tpope/vim-markdown'
-  Plug 'rafi/awesome-vim-colorschemes'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-  Plug 'mattn/emmet-vim'
-  Plug 'SirVer/ultisnips'
-  Plug 'lervag/vimtex'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-telescope/telescope-file-browser.nvim'
+  " Icons
+  Plug 'kyazdani42/nvim-web-devicons'
+  " LSP
+  Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
-  " For ultisnips users.
-  Plug 'SirVer/ultisnips'
-  Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+  " Ver definições 
+  Plug 'ray-x/lsp_signature.nvim'
+  " Temas cores
+  Plug 'EdenEast/nightfox.nvim'
+  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+  Plug 'sainnhe/sonokai'
+  " Transparencia
+  Plug 'xiyaowong/nvim-transparent'
+  " Git diff in the sign column
+  Plug 'airblade/vim-gitgutter'
+  " emmet expand html
+  Plug 'mattn/emmet-vim'
+  " autopairs
+  Plug 'windwp/nvim-autopairs' 
 endif
-
-Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 call plug#end()

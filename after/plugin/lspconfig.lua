@@ -1,4 +1,3 @@
-lua << EOF
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
@@ -26,10 +25,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
@@ -40,7 +35,6 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer' }
 local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -50,4 +44,44 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
-EOF
+
+require'lspconfig'.jedi_language_server.setup{}
+
+nvim_lsp['jedi_language_server'].setup{
+    on_attach = on_attach,
+    cmd = { "jedi-language-server" },
+    filetypes = { "python" },
+    single_file_support = true,
+    init_options = {
+    filetypes = {
+     python = {"flake8"},
+    },
+    linters = {
+      flake8 = {
+        debounce = 100,
+        sourceName = "flake8",
+        command = "flake8",
+        args = {
+          "--format",
+          "%(row)d:%(col)d:%(code)s:%(code)s: %(text)s",
+          "%file",
+        },
+        formatPattern = {
+          "^(\\d+):(\\d+):(\\w+):(\\w).+: (.*)$",
+          {
+              line = 1,
+              column = 2,
+              message = {"[", 3, "] ", 5},
+              security = 4
+          }
+        },
+        securities = {
+          EE = "error",
+          W = "warning",
+          F = "info",
+          B = "hint",
+        },
+      },
+    },
+  }
+}
