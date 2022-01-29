@@ -32,11 +32,23 @@ if has("nvim")
   " Transparencia
   Plug 'xiyaowong/nvim-transparent'
   " Git diff in the sign column
+  Plug 'tpope/vim-fugitive'
   Plug 'airblade/vim-gitgutter'
   " emmet expand html
   Plug 'mattn/emmet-vim'
   " autopairs
   Plug 'windwp/nvim-autopairs' 
+  " Popup
+  Plug 'nvim-lua/popup.nvim'
+  " Markdown preview
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  " Snippets
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  " Commentary
+  Plug 'tpope/vim-commentary'
+  " Surround
+  Plug 'blackCauldron7/surround.nvim'
 endif
 
 call plug#end()

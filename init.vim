@@ -1,5 +1,9 @@
 " Fundamentals "{{{
 " ---------------------------------------------------------------------
+"  sdf
+
+" folder
+set foldmethod=marker
 
 " init autocmd
 autocmd!
@@ -10,6 +14,7 @@ if !1 | finish | endif
 
 set nocompatible
 set number
+set relativenumber
 syntax enable
 set fileencodings=utf-8,sjis,euc-jp,latin
 set encoding=utf-8
@@ -21,8 +26,11 @@ set hlsearch
 set showcmd
 set cmdheight=1
 set laststatus=2
-set scrolloff=10
+set scrolloff=8
+set scrolljump=8
 set expandtab
+set colorcolumn=80
+set cc=+1  " highlight column after 'textwidth'
 "let loaded_matchparen = 1
 set shell=bash
 set backupskip=/tmp/*,/private/tmp/*
@@ -159,3 +167,7 @@ nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
 nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
 " Only set if you have telescope installed
 nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
+
+
+" Markdown Preview
+let g:mkdp_auto_start = 0
